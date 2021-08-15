@@ -15,7 +15,7 @@ export class FormService{
     constructor(private http: HttpClient) {}
 
     addFormData(formData: formData): Observable<formData>{
-        return this.http.post<formData>('../post_message.php', formData)
+        return this.http.post<formData>('http://localhost/post_message.php', formData)
     }
     
 }
