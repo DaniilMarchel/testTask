@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   formDatas: formData
   isSubmit = false
   valCapcha = ""
-  errorCaptcha: string
+  error: string
   @ViewChild('myCanvas') myCanvas: ElementRef;
   context: CanvasRenderingContext2D;
 
@@ -60,14 +60,17 @@ export class AppComponent implements OnInit {
     if (this.form.valid && this.form.value.name.trim() && this.form.value.text.trim()) {
       const formData = {...this.form.value}
       if(formData['numbers'] != this.valCapcha){
-        this.errorCaptcha = "Капча решена неверно. Попробуйте еще раз"
+        this.error = "Капча решена неверно. Попробуйте еще раз"
         return
       }
+      
       formData['phone'] = '8' + formData['phone']
       this.formService.addFormData(formData).subscribe(response => {
         console.log('response', response)
         this.formDatas = response
         this.isSubmit = true
+      }, error => {
+        this.error = error.message
       })
     }
     else{
