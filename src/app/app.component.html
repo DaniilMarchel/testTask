@@ -86,7 +86,7 @@
           <div *ngIf="form.get('numbers').invalid && form.get('numbers').touched" class="validation">
             <small *ngIf="form.get('numbers').errors.required">Поле не может быть пустым</small>
           </div>
-          <div class="validation"><small>{{ errorCaptcha }}</small></div>
+          <div class="validation"><small>{{ error }}</small></div>
         </div>
       </div>
 
