@@ -8,6 +8,9 @@
     $db = pg_connect($connect_string);
 
     $postData = json_decode(file_get_contents("php://input"), true);
+    if(empty($postData)){
+        return;
+    }
     $postData = str_replace("'", "''", $postData);
 
     $query = "SELECT id_contact FROM contacts WHERE email='".$postData['email']."' AND phone='".$postData['phone']."'";

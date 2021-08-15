@@ -2,10 +2,10 @@
     <form [formGroup]="form" (ngSubmit)="submit()">
       <div class="ribbon"><span class="text-ribbon">Напишите нам</span></div>
       <div class="form-group row">
-        <div class="col-3">
+        <div class="col-3 col-sm-3">
           <span>Ваше имя:</span>
         </div>
-        <div class="col-9">
+        <div class="col-9 col-sm-9">
           <input type="text" class="form-control" id="name" formControlName="name">
 
           <div *ngIf="form.get('name').invalid && form.get('name').touched" class="validation">
@@ -16,10 +16,10 @@
       </div>
 
       <div class="form-group row">
-        <div class="col-3">
+        <div class="col-3 col-sm-3">
           <span>Ваш Email:</span>
         </div>
-        <div class="col-9">
+        <div class="col-9 col-sm-9">
           <input type="text" class="form-control" id="email" formControlName="email">
 
           <div *ngIf="form.get('email').invalid && form.get('email').touched" class="validation">
@@ -35,10 +35,10 @@
       </div>
 
       <div class="form-group row">
-        <div class="col-3">
+        <div class="col-3 col-sm-3">
           <span>Ваш телефон:</span>
         </div>
-        <div class="col-9">
+        <div class="col-9 col-sm-9">
           <input type="text" class="form-control" id="phone" formControlName="phone" [showMaskTyped]="true" prefix="+7" mask=" (000) 000-00-00">
           
           <div *ngIf="form.get('phone').invalid && form.get('phone').touched" class="validation">
@@ -49,10 +49,10 @@
       </div>
 
       <div class="form-group row">
-        <div class="col-3">
+        <div class="col-3 col-sm-3">
           <span>Тема:</span>
         </div>
-        <div class="col-9">
+        <div class="col-9 col-sm-3">
           <select class="form-control" id="topic" formControlName="topic">
             <option value="Техподдержка">Техподдержка</option>
             <option value="Продажи">Продажи</option>
@@ -63,10 +63,10 @@
       </div>
 
       <div class="form-group row">
-        <div class="col-3">
+        <div class="col-3 col-sm-3">
           <span>Ваше сообщение:</span>
         </div>
-        <div class="col-9">
+        <div class="col-9 col-sm-9">
           <textarea class="form-control" rows="4" formControlName="text"></textarea>
 
           <div *ngIf="form.get('text').invalid && form.get('text').touched" class="validation">
@@ -77,22 +77,19 @@
       </div>
 
       <div class="form-group row">
-        <div class="col-3">
+        <div class="col-3 col-sm-3">
           <span>Цифры:</span>
         </div>
-        <div class="col-9 form-inline">
-          <input type="text" class="form-control" formControlName="numbers">
+        <div class="col-9 col-sm-9 form-inline">
+          <input type="text" class="form-control" #captcha>
           <canvas id="captcha" width="100" height="26" #myCanvas></canvas>
-          <div *ngIf="form.get('numbers').invalid && form.get('numbers').touched" class="validation">
-            <small *ngIf="form.get('numbers').errors.required">Поле не может быть пустым</small>
-          </div>
           <div class="validation"><small>{{ error }}</small></div>
         </div>
       </div>
 
       <div class="form-group row">
-        <div class="col-3"></div>
-        <div class="col-9">
+        <div class="col-3 col-sm-3"></div>
+        <div class="col-9 col-sm-9">
           <button type="submit">Отправить письмо!</button>
         </div>
       </div>
@@ -114,7 +111,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of formDatas">
+            <tr *ngFor="let item of formData">
               <td>{{ item.name }}</td>
               <td>{{ item.email }}</td>
               <td>{{ item.phone }}</td>

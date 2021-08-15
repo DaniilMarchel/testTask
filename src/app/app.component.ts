@@ -10,9 +10,10 @@ import { formData, FormService } from './form.service'
 export class AppComponent implements OnInit {
 
   form: FormGroup
-  formDatas: formData
+  formData: formData
   isSubmit = false
   valCapcha = ""
+  @ViewChild('captcha') captcha:ElementRef;
   error: string
   @ViewChild('myCanvas') myCanvas: ElementRef;
   context: CanvasRenderingContext2D;
@@ -25,8 +26,7 @@ export class AppComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       phone: new FormControl('', Validators.required),
       topic: new FormControl('Техподдержка', Validators.required),
-      text: new FormControl('', Validators.required),
-      numbers: new FormControl('', Validators.required)
+      text: new FormControl('', Validators.required)
     });  
   }
 
@@ -58,16 +58,15 @@ export class AppComponent implements OnInit {
 
   submit() {
     if (this.form.valid && this.form.value.name.trim() && this.form.value.text.trim()) {
-      const formData = {...this.form.value}
-      if(formData['numbers'] != this.valCapcha){
+      this.formData = {...this.form.value}
+      if(this.captcha.nativeElement.value != this.valCapcha){
         this.error = "Капча решена неверно. Попробуйте еще раз"
         return
       }
       
-      formData['phone'] = '8' + formData['phone']
-      this.formService.addFormData(formData).subscribe(response => {
-        console.log('response', response)
-        this.formDatas = response
+      this.formData['phone'] = '8' + this.formData['phone']
+      this.formService.addFormData(this.formData).subscribe(response => {
+        this.formData = response
         this.isSubmit = true
       }, error => {
         this.error = error.message
