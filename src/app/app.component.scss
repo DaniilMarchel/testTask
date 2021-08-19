@@ -96,5 +96,11 @@
   position: relative;
   top: 10vh;
 }
+
+@media only screen and (max-widtx: 480px) {
+  .container{
+    width: 50%
+  } 
+}
   
   

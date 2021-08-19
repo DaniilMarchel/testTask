@@ -66,7 +66,10 @@ export class AppComponent implements OnInit {
       
       this.formData['phone'] = '8' + this.formData['phone']
       this.formService.addFormData(this.formData).subscribe(response => {
+        console.log(response)
         this.formData = response
+        console.log(this.formData)
+        alert(this.formData)
         this.isSubmit = true
       }, error => {
         this.error = error.message
